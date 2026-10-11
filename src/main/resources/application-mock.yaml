@@ -1,0 +1,22 @@
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:rent_a_plane;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+    show-sql: true
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data-mock.sql
+
+server:
+  port: 8080

@@ -34,6 +34,7 @@ public class Aircraft {
     }
 
     public Aircraft(
+            Long id,
             String name,
             String manufacturer,
             String model,
@@ -41,6 +42,7 @@ public class Aircraft {
             Boolean available,
             BigDecimal hourlyRate
     ) {
+        this.id = id;
         this.name = name;
         this.manufacturer = manufacturer;
         this.model = model;
@@ -48,7 +50,6 @@ public class Aircraft {
         this.available = available;
         this.hourlyRate = hourlyRate;
     }
-
     public Long getId() {
         return id;
     }
