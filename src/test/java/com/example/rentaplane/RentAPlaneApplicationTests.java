@@ -20,18 +20,24 @@ class RentAPlaneApplicationTests {
     @Autowired
     private MockMvc mockMvc;
 
-    @Test
-    void shouldReturnAllAircraft() throws Exception {
-        mockMvc.perform(get("/api/aircraft"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(3))
-                .andExpect(jsonPath("$[0].name").exists());
-    }
+@Test
+void shouldReturnAllAircraft() throws Exception {
+    mockMvc.perform(get("/api/aircraft"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.length()").value(3))
+            .andExpect(jsonPath("$[0].name").value("Cessna 172 Skyhawk"))
+            .andExpect(jsonPath("$[0].manufacturer").value("Cessna"))
+            .andExpect(jsonPath("$[0].hourlyRate").value(2500.00));
+}
 
-    @Test
-    void shouldReturnOnlyAvailableAircraft() throws Exception {
-        mockMvc.perform(get("/api/aircraft?available=true"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(2));
-    }
+@Test
+void shouldReturnOnlyAvailableAircraft() throws Exception {
+    mockMvc.perform(get("/api/aircraft?available=true"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.length()").value(2))
+            .andExpect(jsonPath("$[0].available").value(true))
+            .andExpect(jsonPath("$[1].available").value(true))
+            .andExpect(jsonPath("$[0].name").value("Cessna 172 Skyhawk"))
+            .andExpect(jsonPath("$[1].name").value("Boeing 737"));
+}
 }
